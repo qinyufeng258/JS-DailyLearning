@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <h3>17模拟ready事件</h3>
+       当 DOMContentLoaded 事件触发时，仅当DOM加载完成，不包括样式表，图片，flash。
+
+我们需要给一些元素的事件绑定处理函数。但问题是，如果那个元素还没有加载到页面上，但是绑定事件已经执行完了，是没有效果的。这两个事件大致就是用来避免这样一种情况，将绑定的函数放在这两个事件的回调中，保证能在页面的某些元素加载完毕之后再绑定事件的函数。<br>
+    自定义ready时间，确保元素加载后才绑定事件
+</body>
+<script>
+		
+	//method 1
+	if(document.addEventListener){
+		document.addEventListener("DOMContentLoaded", function(){
+			console.log("DOMContentLoaded is excuted!");
+		}, false);
+	}
+
+	//true
+	window.onready = function(){
+		console.log("DOMContentLoaded is really excuted!");
+	};
+
+</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>15 map, reduce 和foreach的区别</h3>
+       模拟实现map, reduce 和foreach
+</body>
+<script>
+	
+	Array.prototype.map = function(fn){
+
+		var resultArr = [];
+		for(var i=0; i<this.length; i++){
+			resultArr[i] = fn.apply(this,[this[i],i,this]);
+		}
+
+		return resultArr;
+
+	};
+
+	Array.prototype.foreach = function(fn){
+
+		for(var i=0; i<this.length; i++){
+			fn.apply(this,[this[i],i,this]);
+		}
+
+	};
+
+	Array.prototype.reduce = function(fn){
+
+		var frontArr = this[0];
+		for(var i=0; i<this.length; i++){
+			frontArr = fn.apply(this,[frontArr,this[i],i,this]);
+		}
+
+		return frontArr;
+
+	};
+
+	function pow(x) {
+    	return x * x;
+	}
+
+	function add(x,y){
+		return x + y;
+	}
+	var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+	console.log(arr.reduce(add)); 
+	console.log(arr.map(pow)); // [1, 4, 9, 16, 25, 36, 49, 64, 81]
+	
+
+	arr.foreach(function(x,i){
+		console.log(x);
+	});
+
+
+</script>
+</html>

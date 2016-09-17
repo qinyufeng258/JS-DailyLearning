@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="time"></div>
+</body>
+<script>
+	
+	var time = document.getElementById("time");
+
+	function fillZero(num){
+		return num<10 ? '0'+num : num;
+	}
+	function getTime(){
+
+		var d = new Date();
+
+		time.innerHTML = d.getFullYear() + '-' 
+				+ fillZero(d.getMonth() + 1) + '-'
+				+ fillZero(d.getDate()) + ' '
+				+ fillZero(d.getHours()) + ':'
+				+ fillZero(d.getMinutes()) + ':'
+				+ fillZero(d.getSeconds());
+
+		setTimeout(getTime,1000);
+
+	}
+
+	getTime();
+</script>
+</html>

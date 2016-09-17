@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>判断字符串中出现次数最多的字符</h3>
+</body>
+<script>
+	function getMostChars(s){
+		var tmp = {};
+		var max = -999;
+		var index;
+		for(var i=0; i<s.length; i++){
+			if(!tmp[s[i]]){
+				tmp[s[i]] = 1;
+			}
+			else{
+				tmp[s[i]]++;
+			}
+		}
+
+		for(var c in tmp){
+			
+			if(tmp[c] > max){
+				max = tmp[c];
+				index = c;
+			}
+		}
+
+		console.log(index);
+
+
+	}
+
+	getMostChars("JAISDdddKLQW");
+</script>
+</html>

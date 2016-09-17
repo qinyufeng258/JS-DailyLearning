@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2_多种方法实现数组去重</title>
+</head>
+<body>
+	 <h3 style="text-align:center;">2_多种方法实现数组去重</h3>
+     <p style="text-align:center;"></p>   
+</body>
+<script>
+	window.onload = function(){
+
+		var arr = [];
+
+		//随机生成1~20的随机数
+		for(var i = 0; i < 100; i++){
+			arr[i] = Math.floor(Math.random() * 20  + 1);
+
+		}
+
+		console.log(arr);
+
+		//方法一：
+		Array.prototype.unique1 = function(){
+
+			var rearr1 = [];
+			var newarr1 = [];
+
+			for(var i = 0; i < 100; i++){
+				if(!rearr1[arr[i]]){
+					newarr1.push(arr[i]);
+					rearr1[arr[i]] = 1;
+				}
+			}
+
+			console.log(newarr1);
+
+		};
+
+		//验证
+		console.time("使用方法一去重时间");
+        arr.unique1();
+        console.timeEnd("使用方法一去重时间");
+		
+	
+		//方法二：
+	
+		Array.prototype.unique2 = function(){
+
+			
+			var newarr2 = [];
+
+			for(var i = 0; i < 100; i++){
+				if(newarr2.indexOf(arr[i]) == -1){
+					newarr2.push(arr[i]);
+				}
+			}
+
+			console.log(newarr2);
+
+		};
+
+		//验证
+		console.time("使用方法二去重时间");
+        arr.unique2();
+        console.timeEnd("使用方法二去重时间");
+
+        //方法三：
+	
+		Array.prototype.unique3 = function(){
+
+			
+			var newarr3 = [];
+
+			for(var i = 0; i < 100; i++){
+				if(arr.indexOf(arr[i]) == i ){
+					newarr3.push(arr[i]);
+				}
+			}
+
+			console.log(newarr3);
+
+		};
+
+		//验证
+		console.time("使用方法三去重时间");
+        arr.unique3();
+        console.timeEnd("使用方法三去重时间");
+
+        //方法四：
+	
+		Array.prototype.unique4 = function(){
+
+			
+			
+			var otherarr = this.sort();
+			var newarr4 = [otherarr[0]];
+			for(var i = 0; i < 100; i++){
+				if(otherarr[i] !== newarr4[newarr4.length-1] ){
+					newarr4.push(arr[i]);
+				}
+			}
+
+			console.log(newarr4);
+
+		};
+
+		//验证
+		console.time("使用方法四去重时间");
+        arr.unique4();
+        console.timeEnd("使用方法四去重时间");
+
+	};
+</script>
+</html>

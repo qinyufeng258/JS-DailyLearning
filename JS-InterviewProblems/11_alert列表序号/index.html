@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>12点击列表alert其index</h3>
+    <ul id="test">
+        <li>这是第一条</li>
+        <li>这是第二条</li>
+        <li>这是第三条</li>
+    </ul>
+
+</body>
+
+<script>
+	var list = document.getElementById("test");
+	var childs = list.childNodes;
+	var index = 0;
+	var index2 = 0;
+	for(var i=0; i<childs.length; i++){
+		
+		if(childs[i].tagName == "LI"){
+			console.log(childs[i]);
+			childs[i].onclick = function(){
+				console.log(index2++);
+			};
+			childs[i].addEventListener("click", function(){
+				console.log(index++);
+			}, false);
+		}
+	}
+</script>
+</html>

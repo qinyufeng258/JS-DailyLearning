@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>24实现函数range([start,]stop[,step])返回数组</h3>
+        实现函数range([start,]stop[,step])返回一个数组（step大于1）<br>
+            > range(1,11); => [1,2,3,4,5,6,7,8,9,10]<br>
+            > range(0); => []<br>
+            > range(10); => [0,1,2,3,4,5,6,7,8,9]<br>
+            > range(0,30,5); => [0,5,10,15,20,25]
+
+</body>
+<script>
+	function range(){
+		//判断参数有几个
+		//if only one arg
+		var args = Array.prototype.slice.call(arguments);
+		var lens = args.length;
+		var newArr = [];
+		switch(lens){
+			case 0: return newArr; break;
+			case 1: 
+				for(var i=0; i<args[0]; i++){
+					newArr.push(i);
+				}
+				break;
+			case 2:
+				for(var i=args[0]; i<args[1]; i++){
+					newArr.push(i);
+				}
+				break;
+			case 3:
+				for(var i=args[0]; i<args[1]; i+=args[2]){
+					newArr.push(i);
+				}
+				break;
+			default: throw new Error("Arugments Type Error!");break;
+		}	
+
+		return newArr;
+	}
+
+	console.log(range(1,11));
+	console.log(range(0));
+	console.log(range(10));
+	console.log(range(0,30,5));
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <h3>21传入的参数包含相同的数字</h3>
+       实现一个isDuplicate的方法，如果这个方法传入的参数包含相同的数字则返回true，否则返回false<br>
+例如：<br>
+isDuplicate(1,2,3,4,5)//false<br>
+isDuplicate(1,2,3,2)//true<br>
+
+</body>
+<script>
+		
+	function isDuplicate(){
+
+		if(!arguments){
+			throw new Error("arguments type error");
+		}
+		var arr = Array.prototype.slice.call(arguments);
+
+		for(var i=0;i <arr.length; i++){
+			if(arr.indexOf(arr[i]) != i){
+				return false;
+			}
+		}
+
+		return true;
+
+
+
+	}
+
+	console.log(isDuplicate(1,2,3,4,5));
+	console.log(isDuplicate(1,2,3,2));
+
+</script>
+</html>

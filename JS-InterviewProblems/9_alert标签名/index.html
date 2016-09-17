@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <h3>10点击标签alert标签名</h3>
+    <div id="div"><span>SPAN</span>DIV</div>
+    <span>SPAN</span>
+    <p>P</p>
+</body>
+<script>
+	
+
+	document.onclick = function(){
+		var e = event || window.event;
+		var target = e.target || e.srcElement;
+		alert(target.tagName);
+	}
+</script>
+</html>

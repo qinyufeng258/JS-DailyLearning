@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>浅复制与深拷贝</h1>
+	<p>浅复制(影子克隆):只复制对象的基本类型,对象类型,仍属于原来的引用<br>
+深复制(深度克隆):不紧复制对象的基本类,同时也复制原对象中的对象.就是说完全是新对象产生的<br>
+    请编写函数，实现对对象的深度克隆</p>
+</body>
+<script>
+	function deepCloneObject(o){
+
+		if(!o || typeof(o) != 'object'){
+			return o;
+		}
+
+		var newo = Object.prototype.toString.call(o) === 'object Array'?[]:{};
+
+		for(var i in newo){
+			if(newo.hasOwnProperty(i)){
+				newo[i] = typeof o[p] === 'object'?deepCloneObject[newo[i]]:o[p];
+			}
+		}
+
+		return o;
+
+	}
+	var mei = {
+		name: 'Mei',
+		age: '23'
+	}
+
+	var macee = {
+		name: 'Mackree',
+		age: '32',
+		friend: mei
+	};
+
+	var arr = ['12','123'];
+
+	console.log(deepCloneObject(mei));
+	console.log(deepCloneObject(macee));
+	console.log(deepCloneObject(arr));
+</script>
+</html>

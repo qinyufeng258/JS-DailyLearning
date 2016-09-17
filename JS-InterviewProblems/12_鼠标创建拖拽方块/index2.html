@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>14可鼠标创建拖拽小方块</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <style>
+        
+        div{position: absolute;overflow: hidden;}
+        .div{border: 1px dashed #0000ff;height: 0;width: 0;}
+        .ok{border: 1px solid #ccc;background: #EFEFEF;-webkit-user-select:none;cursor: move;}
+        </style>
+    </head>
+<body style = "font-family:'微软雅黑'">
+        <h3>14可鼠标创建拖拽小方块</h3>
+       拉动你的小鼠标
+
+      
+        
+</body>
+    <script>
+     /*
+    *  拖拽画块
+    */
+    function dragDraw(){this.init.apply(this,arguments)}
+    dragDraw.prototype={
+        init:function(){
+            window.zIndex = 0;
+            this.visibleDiv = [];
+            this.iScrollTop = this.iScrollLeft = 0;
+            this.startX = this.startY = 0;
+            this.iDiv = null;
+            this._down();
+        },
+
+        _down:function(){
+
+            var _self = this;
+
+            //当鼠标按下时，拖拽出现一个方块虚线模型
+            document.onmousedown = function(e){
+              var evt = window.event || e;
+
+              //设定初始方块的左上角坐标以及偏倚
+              _self.startX = evt.clientX;
+              
+              _self.startY = evt.clientY;
+              _self.iScrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+              _self.iScrollLeft=document.documentElement.iScrollLeft || document.body.scrollLeft;
+             
+
+              //创建初始方块，并置入相关参数配置
+              var iDiv = document.createElement("div");
+              iDiv.className = "div";
+
+              iDiv.style.left = _self.startX + _self.iScrollLeft + "px";
+              
+              iDiv.style.top = _self.startY + _self.iScrollTop + "px";
+              iDiv.style.zIndex = window.zIndex++;
+              document.body.appendChild(iDiv);
+
+              //鼠标移动，鼠标松开
+              _self.iDiv = iDiv;
+              _self._move();
+              _self._up();
+
+              //保证拖拽时平滑移动
+              this.setCapture && this.setCapture();
+
+              return false;
+
+            }
+        },
+
+        _move:function(itrue, nowDiv){
+
+            var _self = this;
+            document.onmousemove = function(e){
+
+                var evt = window.event || e;
+                var w = evt.clientX - _self.startX;
+                var h = evt.clientY - _self.startY;
+                if(itrue){
+                    nowDiv.style.left=w+_self.iScrollLeft+'px'; 
+                    nowDiv.style.top=h+_self.iScrollTop+'px'; 
+                }else{
+                    _self.iDiv.style.width = Math.abs(w) + "px";
+                    _self.iDiv.style.height = Math.abs(h) + "px";
+                    //console.log(_self.iDiv.style.height);
+                    _self.iDiv.style.left=_self.startX+_self.iScrollLeft+'px'; 
+                    
+                    _self.iDiv.style.top=_self.startY+_self.iScrollTop+'px'; 
+                }
+                
+                
+                return false;
+            }  
+
+        },
+
+        _up:function(itrue){
+
+            var _self = this;
+            document.onmouseup = function(e){
+                if(!itrue){
+                    //如果是初次创建，则创建一个实体方块代替虚拟方块
+                    var trueDiv = document.createElement("div");
+                  
+                    trueDiv.style.left=_self.iDiv.style.left;
+                    trueDiv.style.top=_self.iDiv.style.top;
+                    trueDiv.style.width=_self.iDiv.style.width;
+                    trueDiv.style.height=_self.iDiv.style.height;
+                    trueDiv.className='ok';
+                    trueDiv.style.zIndex=window.zIndex++;
+                    document.body.removeChild(_self.iDiv);
+                    document.body.appendChild(trueDiv);
+                    _self.visibleDiv.push(trueDiv);
+                    _self._trueDivDrag();
+
+                }
+                document.onmousemove = document.onmouseup = null;
+            }
+        },
+
+        _trueDivDrag:function(){
+            var _self = this;
+
+            for(var i=0;i<_self.visibleDiv.length;i++){
+                _self.visibleDiv[i].onmousedown = function(){
+                    var evt = window.event || e;
+                    this.style.zIndex = window.zIndex++;
+                    _self.startX=evt.clientX+_self.iScrollLeft-this.offsetLeft;
+                    _self.startY=evt.clientY+_self.iScrollTop-this.offsetTop;
+                    _self._move(true,this);
+                    _self._up(true);
+                    evt.stopPropagation ? evt.stopPropagation():(evt.cancelBubble = true);
+                };
+            }
+        }
+    }
+
+    var dd = new dragDraw();
+    </script>
+</html>

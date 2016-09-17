@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+function sum(){
+
+	var args = Array.prototype.slice.call(arguments);
+
+	var sums = 0;
+
+	for(var i=0; i<args.length; i++){
+		
+		if (args[i] == true) {
+			sums+=1;
+		}else if(args[i] == false){
+			continue;
+		}else if(typeof args[i] == 'number'){
+			var ins,fls;
+			var err_tag = 0;
+			try{
+				ins = args[i].toString().split(".")[0].length;
+
+				fls = args[i].toString().split(".")[1].length;
+
+				err_tag = 1;
+			}catch(e){
+
+			}
+			sums+= args[i];
+			//console.log(sums);
+			if(err_tag == 1){
+				//console.log("float");
+				sums = sums.toString().substr(0, ins+fls+1);
+			}
+			sums = parseFloat(sums);
+
+			
+			//console.log(sums);
+		}
+	}
+
+	return sums;
+
+}
+console.log(sum('0.1',false,1,true,'A',1,'B',1));
+</script>
+</html>

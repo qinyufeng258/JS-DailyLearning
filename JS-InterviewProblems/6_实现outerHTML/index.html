@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+ <h3>5实现outerHTML</h3>
+       FF不支持outerHTML，要实现outerHTML还需要特殊处理<br>
+       outerHTML可以用来更改或获取元素内所有的html和文本内容，包含引用该方法元素自身的标签．<br>
+        innerHTML是用来获取元素内的html内容和文本．<br>
+        innerText只获取元素内的文本内容，html标签将被忽略．
+  <div id="content">
+  	<ul>
+  		<li>Item1</li>
+  		<li>Item2</li>
+  		<li>Item3</li>
+  		<li>Item4</li>
+  		<li>Item5</li>
+  	</ul>
+  </div>
+
+</body>
+<script>
+	// if(typeof HTMLElement !== "undefined" && !("outerHTML" in HTMLElement.prototype)){
+	// 	HTMLElement.prototype.outerHTML= function(){
+	// 		if(typeof this == "object"){
+	// 			var div = document.createElement("div");
+
+	// 			div.appendChild(this.cloneNode(true));
+
+	// 			return div.innerHTML;
+	// 		}
+	// 	}
+	// }
+
+	//test
+
+	var div = document.getElementById("content");
+	console.log(div.outerHTML);
+</script>
+</html>

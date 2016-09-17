@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1_求一个字符串的字节长度</title>
+</head>
+<body>
+	 <h3 style="text-align:center;">1求一个字符串的字节长度</h3>
+     <p style="text-align:center;">假设一个英文字符占有一个字节，一个中文字符占有两个字节</p>   
+</body>
+<script>
+	window.onload = function(){
+
+		function getBytes(s){
+
+			var lens = s.length;
+			var bytes = 0;
+
+			for(var i=0; i<lens; i++){
+				if(s.charCodeAt(i) > 255){
+					bytes+=2;
+				}
+				else{
+					bytes++;
+				}
+			}
+
+			return bytes;
+		}
+
+		//test
+		console.log("测试数据");
+		var s = "你好World";
+		console.log("\'你好World\'的字节长度为" + getBytes(s) + "个字节。");
+	};
+</script>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>26暂停执行的javascript函数</h3>
+写一个可以暂停执行的JavaScript函数
+
+<div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+<input type="button" value="方法一继续" onclick='st();'/>
+
+</body>
+<script>
+
+    //method 1
+    //利用闭包的特性
+    function test1(x){
+        console.log(x++);
+        return function(){
+            console.log(x++);
+        }
+    }
+
+    var st = test1(10);
+
+
+    //method 2
+    //自定义实现sleep(1000)函数
+    function pause(obj,sec){
+        if(window.eventList == undefined){
+            window.eventList = [];
+        }
+
+        var ind = -1;
+        for(var i=0; i<window.eventList.length; i++){
+            if(window.eventList[i] == null){
+                window.eventList[i] = obj;
+                ind = i;
+                break;
+            }
+        }
+
+        if(ind == -1){
+            ind = window.eventList.length;
+            window.eventList[ind] = obj;
+        }
+        setTimeout("goon("+ ind +")", sec);
+    }
+
+    function goon(ind){
+
+        var obj = window.eventList[ind];
+        window.eventList[ind] = null;
+        if(obj.nextStep){
+            obj.nextStep();
+        }
+        else{
+            obj();
+        }
+    }
+
+    function test2(){
+        console.log("part1 go!");
+        pause(this,2000);
+        this.nextStep = function(){
+            console.log("part2 go!");
+        }
+    }
+
+    test2();
+
+
+</script>
+</html>

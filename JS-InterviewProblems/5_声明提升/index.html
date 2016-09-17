@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>声明提升</h3>
+	<p>变量声明是在作用域的顶端，但是赋值没有</p>
+	<p>命名函数表达式会提升变量名，但函数名或函数体没有</p>
+	<p>匿名表达式会提升变量名，但函数复制没有</p>
+	<p>函数声明会提升变量名和函数体</p>
+</body>
+<script>
+		
+	function test(){
+
+		function example1(){
+			console.log(e1);//error
+		}
+
+		function example2(){
+			var e2;
+			console.log(e2);//undefined
+			d2 = 2;
+		}
+
+		function example3(){
+			console.log(e3); //undefined
+			e3(); 
+			var e3 = function(){
+				console.log("e3");
+			}
+		}
+
+		function example4(){
+			console.log(e4);// undefined
+			e4(); //error
+			func4(); //error
+			var e4 = function func4(){
+				console.log("e4");
+			}
+		}
+
+		function example5(){
+			console.log(e5); // undefined
+			e5(); //error
+
+			var e5 = function e5(){
+				console.log("e5");
+			}
+		}
+
+		function example6(){
+			e6(); //e6
+			function e6(){
+				console.log("e6");
+			}
+		}
+
+
+	}
+
+	console.info(test);
+
+</script>
+</html>

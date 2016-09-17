@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			margin:0;
+			padding:0;
+			width: 100%;
+		}
+		header{
+			width: 100%;
+			border: 1px solid #00FF00;
+			overflow: hidden;
+		}
+		header .logo{
+			float:left;
+			border: 1px solid #FF0000;
+			width: 100px;
+			height: 100px;
+		}
+		header .username{
+			float:right;
+			border: 1px solid #7F7F7F;
+			width: 150px;
+			height: 50px;
+		}
+		section{
+			
+			
+			margin-right: 210px;
+			border: 1px solid #0000FF;
+			height: 500px;
+			
+		}
+		aside{
+			float:right;
+			width: 200px;
+			height: 50px;
+			border: 1px solid #ff0000;
+		}
+		footer{
+			width: 100%;
+			height: 50px;
+			border: 1px solid #7F7F7F;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="logo"></div>
+		<div class="username"></div>
+	</header>
+	<aside>
+		
+	</aside>
+	<section>
+		
+	</section>
+	
+	<footer>
+		
+	</footer>
+</body>
+<script>
+	/**
+ *@desc: fibonacci
+ *@param: count {Number}
+ *@return: result {Number} 第count个fibonacci值，计数从0开始
+  fibonacci数列为：[1, 1, 2, 3, 5, 8, 13, 21, 34 …]
+  则getNthFibonacci(0)返回值为1
+  则getNthFibonacci(4)返回值为5
+ */
+
+//递归法
+function getNthFibonacci(count){
+	if(count == 0 || count ==1){
+		return 1;
+	}
+	return getNthFibonacci(count-1) + getNthFibonacci(count-2);
+}
+
+//非递归
+function getNthFibonacci2(count){
+
+	if(count == 0 || count ==1){
+		return 1;
+	}
+
+	var first = 1;
+	var second = 1;
+	var third = 0;
+
+	for(var i=2; i<=count; i++){
+
+		third = first + second;
+		first = second;
+		second = third;
+
+	}
+
+	return third;
+
+}
+console.log(getNthFibonacci(28));
+console.log(getNthFibonacci2(4));
+</script>
+</html>
