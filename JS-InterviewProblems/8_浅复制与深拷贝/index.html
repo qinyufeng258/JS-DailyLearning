@@ -17,23 +17,25 @@
 			return o;
 		}
 
-		var newo = Object.prototype.toString.call(o) === 'object Array'?[]:{};
+		var newo = Object.prototype.toString.call(o) === '[object Array]'?[]:{};
 
-		for(var i in newo){
-			if(newo.hasOwnProperty(i)){
-				newo[i] = typeof o[p] === 'object'?deepCloneObject[newo[i]]:o[p];
+		for(var i in o){
+			if(o.hasOwnProperty(i)){
+				newo[i] = typeof o[i] === 'object'?deepCloneObject[o[i]]:o[i];
 			}
 		}
 
 		return o;
 
 	}
-	var mei = {
+	var mei;
+	mei = {
 		name: 'Mei',
 		age: '23'
-	}
+	};
 
-	var macee = {
+	var macee;
+	macee = {
 		name: 'Mackree',
 		age: '32',
 		friend: mei
