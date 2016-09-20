@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function createXHR(){
+        if(typeof XMLHttpRequest != "undefined"){
+            return new XMLHttpRequest();
+        }else if(typeof ActiveXObject != "undefined"){
+            var versions = [ "MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0","MSXML2.XMLHttp"],
+                    i,
+                    len;
+            for(var i=0, len = versions.length; i<len; i++){
+                try {
+                    new ActiveXObject(versions[i]);
+                    arguments.callee.activeString = versions[i];
+                }catch (ex){
+                    //none
+                }
+            }
+
+            return new ActiveXObject(arguments.callee.activeString);
+
+        } else{
+            throw new Error("No XHR object availble.");
+        }
+
+
+
+    }
+
+
+    var xhr = createXHR();
+
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+                console.log(xhr.responseText);
+            } else {
+                console.log("Request was unsuccessful:" + xhr.status);
+            }
+        }
+    };
+
+    xhr.open("get", "index.php", true);
+    var form = document.getElementById("user-info");
+    xhr.send(new FormData(form));
+
+
+</script>
+</html>
