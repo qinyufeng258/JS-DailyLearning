@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="time"></div>
+</body>
+<script>
+
+
+    function countDown(h,m,s){
+
+        var time = document.getElementById("time");
+        time.innerHTML = h + ":" + m + ":" + s;
+
+        var t = setInterval(function(){
+            if(--s <= 0 ){
+                m--;
+                if(m < 0){
+                    h--;
+                    if(h <=0 && m <=0 && s<=0){
+                        clearInterval(t);
+                        time.innerHTML = "0:0:0";
+                        return;
+                    }
+                    m=59;
+                }
+                s=59;
+
+            }
+            time.innerHTML = h + ":" + m + ":" + s;
+        },100);
+
+    }
+
+    countDown(1,32,45);
+
+</script>
+</html>
