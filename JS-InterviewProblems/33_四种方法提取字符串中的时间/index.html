@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>31将字符串中的年月日时分秒取出来</h3>
+定义一个字符串<br>
+var str1="2012-04-06 12:30:30"<br>
+要求：将字符串中的年月日时分秒取出来，存到数组里，请用尽可能多的方法实现
+
+</body>
+<script>
+
+    function method1(s){
+        //正则表达式
+        var re = /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/gi;
+        //s.match(re);
+        var arr = [];
+        if(re.test(s)){
+            for(var i=1; i<=6; i++){
+                arr.push(eval("RegExp.$"+ i));//使用eval执行字符串命令来使得可以执行RegExp.$1 $2之类的命令
+            }
+        }
+        return arr;
+
+    }
+
+    function method2(s){
+
+        var arr = [];
+        var dateTime = s.split(" ");
+        var date = dateTime[0].split("-");
+        var time = dateTime[1].split(":");
+
+        for(var i=0; i<date.length; i++){
+            arr.push(date[i]);
+        }
+        for(var i=0; i<time.length; i++){
+            arr.push(time[i]);
+        }
+
+        return arr;
+
+    }
+
+    function method3(s){
+
+        var reg = /\d+/g;
+        var arr = [];
+        s.replace(reg,function(match){
+
+            //console.log(match);
+            arr.push(match);
+
+        });
+
+        return arr;
+
+    }
+
+    //console.log(method1(str));
+    //console.log(method2(str));
+    //console.log(method3(str));
+
+
+    function method4(s){
+
+        var reg = /\d+/g;
+
+        var arr = reg.exec(s);
+
+        return arr;
+    }
+
+
+    var str = "2012-04-06 12:30:30";
+    console.log(method4(str));
+
+
+
+
+</script>
+</html>

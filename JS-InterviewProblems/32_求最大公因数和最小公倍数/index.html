@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    function maxComFactor(a,b){
+        var u,v,t;
+        u = a;
+        v = b;
+        t = v;
+        while(v!=0){
+            t = u%v;
+            u = v;
+            v = t;
+        }
+
+        return u;
+    }
+
+    function minComMuti(a,b){
+        return a*b / maxComFactor(a,b);
+    }
+    console.log(maxComFactor(20,24));
+    console.log(minComMuti(20,24));
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var costs = [1,2,1001];
+    var money = 1000;
+    costs.sort(function(a,b){
+        if(a > b){
+            return true;
+        }else{
+            return false;
+        }
+    });
+    costs.reverse();
+    var tmp = [];
+    for(var i=0; i<costs.length; i++){
+        if(costs[i] > 0){
+            tmp.push(costs[i]);
+        }
+    }
+    costs = tmp;
+    //console.log(costs);
+    var mindays = 0;
+    var delmon = money;
+    var tag = 0;
+    for(var i=0,len=costs.length; i<len; i++){
+        for(var j=i,len=costs.length; j<len; j++){
+            if(costs[j] > delmon){
+                continue;
+            }else{
+                if(costs[j] == delmon){
+                    //console.log(costs[j],j);
+                    mindays++;
+                    delmon = 0;
+                    break;
+                }else{
+                    mindays+= Math.floor(delmon / costs[j]);
+                    delmon = delmon % costs[j];
+                }
+
+            }
+        }
+        if(delmon != 0){
+            delmon = money;
+            mindays = 0;
+        }else{
+            tag = 1;
+            break;
+        }
+
+    }
+
+    if(tag == 1){
+        console.log(mindays);
+    }
+    else{
+        console.log(-1);
+    }
+
+
+</script>
+</html>
